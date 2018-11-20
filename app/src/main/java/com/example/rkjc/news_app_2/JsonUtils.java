@@ -31,7 +31,6 @@ public class JsonUtils {
             for(int i = 0 ; i < Jarray.length() ; i++){
                 NewsItemArrayList.add(new NewsItem(Jarray.getJSONObject(i).getString("author"), Jarray.getJSONObject(i).getString("title"), Jarray.getJSONObject(i).getString("description"), Jarray.getJSONObject(i).getString("url"), Jarray.getJSONObject(i).getString("urlToImage"), Jarray.getJSONObject(i).getString("publishedAt")));
             }
-
         }
         catch (JSONException e){
             Log.d("TAG", e.toString());

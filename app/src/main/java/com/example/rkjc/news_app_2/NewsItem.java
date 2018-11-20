@@ -1,72 +1,84 @@
 package com.example.rkjc.news_app_2;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
+
 import java.util.ArrayList;
 
+
+@Entity(tableName = "news_item")
 public class NewsItem {
 
+    @PrimaryKey(autoGenerate = true)
+    private int id;
 
-    private String author;
-    private String title;
-    private String description;
-    private String url;
-    private String urlToImage;
-    private String publishedAt;
+    @ColumnInfo(name = "Author")
+    public String mAuthor;
+
+    @ColumnInfo(name = "Title")
+    public String mTitle;
+
+    @ColumnInfo(name = "Description")
+    public String mDescription;
+
+    @ColumnInfo(name = "Url")
+    public String mUrl;
+
+    @ColumnInfo(name = "Url_To_Image")
+    public String mUrlToImage;
+
+    @ColumnInfo(name = "Published_Date")
+    public String mPublishedAt;
 
 
-    public NewsItem(String author, String title, String description, String url, String urlToImage, String publishedAt) {
-        this.author = author;
-        this.title = title;
-        this.description = description;
-        this.url = url;
-        this.urlToImage = urlToImage;
-        this.publishedAt = publishedAt;
+    public NewsItem(String mAuthor, String mTitle, String mDescription, String mUrl, String mUrlToImage, String mPublishedAt) {
+        this.mAuthor = mAuthor;
+        this.mTitle = mTitle;
+        this.mDescription = mDescription;
+        this.mUrl = mUrl;
+        this.mUrlToImage = mUrlToImage;
+        this.mPublishedAt = mPublishedAt;
     }
 
-    public String getAuthor() {
-        return author;
+    @Ignore
+    public NewsItem() {
+
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+
+    public int getId() {
+        return id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getmAuthor() {
+        return mAuthor;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public String getmTitle() {
+        return mTitle;
     }
 
-    public String getDescription() {
-        return description;
+    public String getmDescription() {
+        return mDescription;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public String getmPublishedAt() {
+        return mPublishedAt;
     }
 
-    public String getUrl() {
-        return url;
+    public String getmUrl() {
+        return mUrl;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public String getmUrlToImage() {
+        return mUrlToImage;
     }
 
-    public String getUrlToImage() {
-        return urlToImage;
-    }
-
-    public void setUrlToImage(String urlToImage) {
-        this.urlToImage = urlToImage;
-    }
-
-    public String getPublishedAt() {
-        return publishedAt;
-    }
-
-    public void setPublishedAt(String publishedAt) {
-        this.publishedAt = publishedAt;
+    public void setId(int id) {
+        this.id = id;
     }
 }
+

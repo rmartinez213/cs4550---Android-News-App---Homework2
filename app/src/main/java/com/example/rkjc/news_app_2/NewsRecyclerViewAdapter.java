@@ -76,10 +76,10 @@ public class NewsRecyclerViewAdapter  extends RecyclerView.Adapter<NewsRecyclerV
 
         //bind the texts with their views
         void bind(final int listIndex){
-            title.setText("Title:" + mNewsItems.get(listIndex).getTitle());
-            description.setText("Description" + mNewsItems.get(listIndex).getDescription());
-            date.setText("Date" + mNewsItems.get(listIndex).getPublishedAt());
-            url.setText(mNewsItems.get(listIndex).getUrl());
+            title.setText("Title:" + mNewsItems.get(listIndex).getmTitle());
+            description.setText("Description" + mNewsItems.get(listIndex).getmDescription());
+            date.setText("Date" + mNewsItems.get(listIndex).getmPublishedAt());
+            url.setText(mNewsItems.get(listIndex).getmUrl());
         }
     }
 }
