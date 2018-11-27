@@ -12,14 +12,15 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import android.widget.TextView;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class NewsRecyclerViewAdapter  extends RecyclerView.Adapter<NewsRecyclerViewAdapter.NewsViewHolder> {
 
     Context mContext;
-    ArrayList<NewsItem> mNewsItems;
+    List<NewsItem> mNewsItems;
 
-    public NewsRecyclerViewAdapter(Context context, ArrayList<NewsItem> newsItems){
+    public NewsRecyclerViewAdapter(Context context, List<NewsItem> newsItems){
         this.mContext = context;
         this.mNewsItems = newsItems;
     }
@@ -33,17 +34,22 @@ public class NewsRecyclerViewAdapter  extends RecyclerView.Adapter<NewsRecyclerV
 
         View view = inflater.inflate(R.layout.news_item, parent, shouldAttachToParentImmediately);
         NewsViewHolder viewHolder = new NewsViewHolder(view);
-        return  viewHolder;
+        return viewHolder;
     }
 
     @Override
-    public void  onBindViewHolder(NewsRecyclerViewAdapter.NewsViewHolder holder, int position){
+    public void onBindViewHolder(NewsRecyclerViewAdapter.NewsViewHolder holder, int position){
         holder.bind(position);
     }
 
     @Override
     public int getItemCount(){
         return mNewsItems.size();
+    }
+
+    public void setNewsItems(List<NewsItem> items){
+        this.mNewsItems = items;
+        notifyDataSetChanged();
     }
 
 

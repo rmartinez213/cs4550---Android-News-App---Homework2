@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     private RecyclerView mRecyclerView;
     private NewsRecyclerViewAdapter mAdapter;
-    private ArrayList<NewsItem> newsItems = new ArrayList<>();
+    private List<NewsItem> newsItems = new ArrayList<>();
 
 
 
@@ -49,37 +49,23 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        mSearchResultsTextView = (TextView) findViewById(R.id.date);
-//        mRecyclerView = (RecyclerView)findViewById(R.id.news_recyclerview);
-//        mAdapter = new NewsRecyclerViewAdapter(this, newsItems);
-//        mRecyclerView.setAdapter(mAdapter);
-//        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mSearchResultsTextView = (TextView) findViewById(R.id.date);
+        mRecyclerView = (RecyclerView)findViewById(R.id.news_recyclerview);
+        mAdapter = new NewsRecyclerViewAdapter(this, newsItems);
+        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
 
         //New Code Homework2
         newsItemViewModel = ViewModelProviders.of(this).get(NewsItemViewModel.class);
         newsItemViewModel.getAllNewsItems().observe(this, new Observer<List<NewsItem>>() {
             @Override
             public void onChanged(@Nullable List<NewsItem> newsItems) {
-                //update RecyclerView
-                Toast.makeText(MainActivity.this, "onChanged", Toast.LENGTH_SHORT).show();
+                mAdapter.setNewsItems(newsItems);
             }
         });
-
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        int itemThatWasClickedId = item.getItemId();
-        if(itemThatWasClickedId == R.id.action_search){ //When refresh is clicked, actions are performed
-            URL url = NetworkUtils.buildURL(); //Returns proper URL with API Key
-            QueryTask task = new QueryTask();
-            task.execute(url);
-
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     public class QueryTask extends AsyncTask<URL, Void, String>{
 
@@ -114,5 +100,25 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState){
+        super.onSaveInstanceState(outState);
+        outState.putString("NewsResults", "Test");
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+
+        switch (item.getItemId()){
+
+            case R.id.action_search:
+                newsItems = this.newsItemViewModel.sync();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

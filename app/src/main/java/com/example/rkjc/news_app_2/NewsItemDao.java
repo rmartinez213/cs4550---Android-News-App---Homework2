@@ -14,7 +14,7 @@ public interface NewsItemDao {
 
     //Inserts data
     @Insert
-    void insert(NewsItem item);
+    void insert(List<NewsItem> item);
 
     //Clears all data
     @Query("DELETE FROM news_item")
